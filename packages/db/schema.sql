@@ -38,3 +38,37 @@ CREATE TABLE IF NOT EXISTS client_access (
   created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
   UNIQUE (client_id, profile_id)
 );
+-- =========================
+-- Meetings (MVP)
+-- =========================
+
+CREATE TABLE IF NOT EXISTS meetings (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  client_id UUID NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+
+  title TEXT NOT NULL,
+  start_time TIMESTAMPTZ NOT NULL,
+  duration_minutes INT NOT NULL DEFAULT 30 CHECK (duration_minutes > 0 AND duration_minutes <= 480),
+
+  -- Jitsi identifiers
+  room_slug TEXT NOT NULL,
+  public_id TEXT NOT NULL UNIQUE, -- used in the public join URL
+
+  status TEXT NOT NULL DEFAULT 'scheduled' CHECK (status IN ('scheduled', 'live', 'completed', 'failed')),
+
+  recording_status TEXT NOT NULL DEFAULT 'none'
+    CHECK (recording_status IN ('none', 'processing', 'ready', 'failed')),
+  transcript_status TEXT NOT NULL DEFAULT 'none'
+    CHECK (transcript_status IN ('none', 'processing', 'ready', 'failed')),
+
+  recording_url TEXT NULL,
+  transcript_url TEXT NULL,
+
+  created_by UUID NOT NULL REFERENCES profiles(id) ON DELETE SET NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- Helpful index for client profile meeting lists
+CREATE INDEX IF NOT EXISTS idx_meetings_client_start_time
+  ON meetings (client_id, start_time DESC);
