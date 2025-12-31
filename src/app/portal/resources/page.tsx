@@ -14,10 +14,14 @@ export default function PortalResourcesPage() {
 
       <section style={{ marginTop: 16, padding: 16, border: "1px solid #333", borderRadius: 12 }}>
         <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700 }}>Downloads (prototype)</h2>
+        <p style={{ opacity: 0.75, marginTop: 6 }}>
+          These are placeholders. Later these will link to real files in the resource library.
+        </p>
+
         <ul style={{ marginTop: 10 }}>
-          <li><a href="#" onClick={(e) => e.preventDefault()}>Monthly Reporting Template (PDF)</a></li>
-          <li><a href="#" onClick={(e) => e.preventDefault()}>Campaign Planner Checklist</a></li>
-          <li><a href="#" onClick={(e) => e.preventDefault()}>Competitor SWOT Worksheet</a></li>
+          <li>Monthly Reporting Template (PDF)</li>
+          <li>Campaign Planner Checklist</li>
+          <li>Competitor SWOT Worksheet</li>
         </ul>
       </section>
     </main>
