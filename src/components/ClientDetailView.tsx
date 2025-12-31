@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import KpiChart from "@/components/KpiChart";
 import { getMockKpis } from "@/lib/data/kpi";
+import type { DataSource } from "../lib/data/source";
+import { isValidSource } from "../lib/data/source";
 
 type Tab = "overview" | "contacts" | "budgets" | "competitors" | "activity";
 
@@ -36,6 +38,20 @@ const MOCK_COMPETITORS: Record<string, { name: string; domain: string; note: str
 export default function ClientDetailView({ clientId }: { clientId: string }) {
   const id = decodeURIComponent(clientId).trim();
   const client = MOCK_CLIENTS[id];
+  const initialSource: DataSource = useMemo(() => {
+    const sp = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
+    const s = sp.get("source");
+    return isValidSource(s) ? s : "mock";
+  }, []);
+
+  const [source, setSource] = useState<DataSource>(initialSource);
+
+  function updateSource(next: DataSource) {
+    setSource(next);
+    const url = new URL(window.location.href);
+    url.searchParams.set("source", next);
+    window.history.replaceState({}, "", url.toString());
+  }
 
   const [tab, setTab] = useState<Tab>("overview");
 
@@ -103,13 +119,53 @@ export default function ClientDetailView({ clientId }: { clientId: string }) {
       </section>
 
       <section style={{ marginTop: 16 }}>
+        <div style={{ marginTop: 10, display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+          <div style={{ opacity: 0.75 }}>Data source:</div>
+
+          <button
+            onClick={() => updateSource("mock")}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 10,
+              border: "1px solid #333",
+              background: source === "mock" ? "#222" : "transparent",
+              cursor: "pointer",
+            }}
+          >
+            Mock
+          </button>
+
+          <button
+            onClick={() => updateSource("real")}
+            style={{
+              padding: "8px 12px",
+              borderRadius: 10,
+              border: "1px solid #333",
+              background: source === "real" ? "#222" : "transparent",
+              cursor: "pointer",
+            }}
+          >
+            Real (later)
+          </button>
+
+          {source === "real" && (
+            <span style={{ opacity: 0.75 }}>Real mode placeholder — next we wire Google Trends + ad APIs.</span>
+          )}
+        </div>
+
         {tab === "overview" && (
           <div style={{ display: "grid", gap: 14 }}>
             <div style={{ padding: 16, border: "1px solid #333", borderRadius: 12 }}>
               <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700 }}>Performance snapshot</h2>
               <p style={{ opacity: 0.75, marginTop: 6 }}>Prototype chart (mocked KPIs).</p>
               <div style={{ marginTop: 10, padding: 12, borderRadius: 10, background: "#111" }}>
+              {source === "mock" ? (
                 <KpiChart data={getMockKpis(client.id)} />
+              ) : (
+                <div style={{ padding: 24, opacity: 0.8 }}>
+                  No real KPI data connected yet for this client.
+                </div>
+              )}
               </div>
             </div>
 
