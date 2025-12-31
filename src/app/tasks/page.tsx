@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import AppShell from "../../components/AppShell";
+
 
 type Status = "To Do" | "In Progress" | "Done";
 type Priority = "High" | "Medium" | "Low";
@@ -47,6 +49,7 @@ export default function TasksPage() {
   const today = new Date().toISOString().slice(0, 10);
 
   return (
+    <AppShell>
     <main style={{ padding: 24 }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 26, fontWeight: 800 }}>Tasks & Action Items</h1>
@@ -138,7 +141,9 @@ export default function TasksPage() {
       <p style={{ opacity: 0.75, marginTop: 12 }}>
         Prototype: changes are in-memory. Next: persist tasks in DB per tenant/client.
       </p>
+      
     </main>
+    </AppShell>
   );
 }
 

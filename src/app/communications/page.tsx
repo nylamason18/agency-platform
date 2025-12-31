@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import AppShell from "../../components/AppShell";
 
 type Channel = "Email" | "Call" | "Meeting" | "Slack/Chat";
 
@@ -69,6 +70,7 @@ export default function CommunicationsPage() {
   }
 
   return (
+    <AppShell>
     <main style={{ padding: 24 }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 26, fontWeight: 800 }}>Communications Log</h1>
@@ -160,5 +162,6 @@ export default function CommunicationsPage() {
         </p>
       </section>
     </main>
+    </AppShell>
   );
 }

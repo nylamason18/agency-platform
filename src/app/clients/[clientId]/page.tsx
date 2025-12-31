@@ -9,6 +9,6 @@ export default async function ClientDetailPage({
   params: Promise<{ clientId: string }>;
 }) {
   const { clientId } = await params;
-  return <AppShell><ClientDetailView clientId={clientId} /></AppShell>AppShell>;
+  return <AppShell><ClientDetailView clientId={clientId} /></AppShell>;
 }
 
