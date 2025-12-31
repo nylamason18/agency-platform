@@ -28,3 +28,30 @@ p {
   font-size: 1.1rem;
   color: #666;
 }
+:root{
+  --bg: #0b0a0a;
+  --panel: #141112;
+  --panel2: #1a1415;
+  --border: rgba(255,255,255,.08);
+
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.68);
+
+  --maroon: #6b0f1a;
+  --maroon2: #8a1c2c;
+  --gold: #d6b36a;
+  --tan: #f3e7cf;
+
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 16px;
+}
+
+body{
+  background: radial-gradient(1200px 700px at 20% 0%, rgba(107,15,26,.25), transparent 55%),
+              radial-gradient(900px 600px at 90% 20%, rgba(214,179,106,.18), transparent 55%),
+              var(--bg);
+  color: var(--text);
+}
+
+a{ color: var(--tan); text-decoration: none; }
+a:hover{ text-decoration: underline; }

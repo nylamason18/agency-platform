@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -9,6 +10,7 @@ const supabase = createClient(
 );
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState<string>("");
@@ -42,9 +44,23 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
           style={{ padding: 10 }}
         />
-        <button onClick={signIn} style={{ padding: 10 }}>
+        <button
+          onClick={() => router.push("/dashboard")}
+          style={{
+            padding: "12px",
+            width: "100%",
+            borderRadius: 12,
+            border: "1px solid var(--border)",
+            background:
+              "linear-gradient(135deg, var(--maroon), var(--maroon2))",
+            color: "white",
+            fontWeight: 800,
+            cursor: "pointer",
+          }}
+        >
           Sign in
         </button>
+
         <p>{msg}</p>
       </div>
     </main>

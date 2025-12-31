@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import AppShell from "../../components/AppShell";
 
 type ClientRow = {
   id: string;
@@ -78,6 +79,7 @@ export default function ClientsPage() {
   }, [q, status, sort]);
 
   return (
+    <AppShell>
     <main style={{ padding: 24 }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 26, fontWeight: 800 }}>Clients</h1>
@@ -144,5 +146,6 @@ export default function ClientsPage() {
         </table>
       </section>
     </main>
+    </AppShell>
   );
 }
