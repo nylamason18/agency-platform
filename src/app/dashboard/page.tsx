@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import KpiChart from "../../components/KpiChart";
-import { getMockKpis } from "../../lib/data/kpi";
-import type { DataSource } from "../../lib/data/source";
-import { isValidSource } from "../../lib/data/source";
-import AppShell from "../../components/AppShell";
+import KpiChart from "@/components/KpiChart";
+import { getMockKpis } from "@/lib/data/kpi";
+import type { DataSource } from "@/lib/data/source";
+import { isValidSource } from "@/lib/data/source";
+import AppShell from "@/components/AppShell";
 
 function Card({ title, value, hint }: { title: string; value: string; hint?: string }) {
   return (

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import AppShell from "../../components/AppShell";
+import AppShell from "@/components/AppShell";
 
 type Channel = "Email" | "Call" | "Meeting" | "Slack/Chat";
 

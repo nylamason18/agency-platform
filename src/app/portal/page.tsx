@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import KpiChart from "../../components/KpiChart";
-import { getMockKpis } from "../../lib/data/kpi";
+import AppShell from "@/components/AppShell";
+import KpiChart from "@/components/KpiChart";
+import { getMockKpis } from "@/lib/data/kpi";
 
 export default function ClientPortalPage() {
   // Prototype: pretend this is the logged-in client’s view (read-only)
   const clientName = "RetailMax";
 
   return (
+    <AppShell>
     <main style={{ padding: 24 }}>
       <header
         style={{
@@ -213,6 +215,7 @@ export default function ClientPortalPage() {
         </ul>
       </section>
     </main>
+    </AppShell>
   );
 }
 

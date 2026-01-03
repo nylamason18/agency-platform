@@ -1,7 +1,9 @@
 import Link from "next/link";
+import AppShell from "@/components/AppShell";
 
 export default function PortalProjectsPage() {
   return (
+    <AppShell>
     <main style={{ padding: 24 }}>
       <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h1 style={{ fontSize: 26, fontWeight: 800 }}>Portal • Projects</h1>
@@ -20,5 +22,6 @@ export default function PortalProjectsPage() {
         </ul>
       </section>
     </main>
+    </AppShell>
   );
 }
