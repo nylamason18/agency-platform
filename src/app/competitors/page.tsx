@@ -1,5 +1,5 @@
-import AppShell from "@/components/AppShell";
-import CompetitorCenterView from "@/components/CompetitorCenterView";
+import AppShell from "../../components/AppShell";
+import CompetitorCenterView from "../../components/CompetitorCenterView";
 
 export default function CompetitorsPage() {
   return (
@@ -8,3 +8,4 @@ export default function CompetitorsPage() {
     </AppShell>
   );
 }
+
